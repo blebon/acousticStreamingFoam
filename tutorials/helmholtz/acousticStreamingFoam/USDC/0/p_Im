@@ -1,0 +1,51 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  9
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      p_Im;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    "(hot-top|graphite|mould|water-film|sonotrode-wall|fixed)"
+    {
+        type            zeroGradient;
+    }
+
+    sonotrode
+    {
+        type            fixedGradient;
+        gradient        uniform 15818758.85251479;
+    }
+
+    ram
+    {
+        type            zeroGradient;
+    }
+
+    free-surface
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+
+    symmetric
+    {
+        type		symmetry;
+    }
+}
+
+// ************************************************************************* //
