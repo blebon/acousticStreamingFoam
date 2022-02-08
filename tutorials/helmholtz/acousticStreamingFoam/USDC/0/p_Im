@@ -28,7 +28,7 @@ boundaryField
     sonotrode
     {
         type            fixedGradient;
-        gradient        uniform 15818758.85251479;
+        gradient        uniform 15818758852.51479;
     }
 
     ram

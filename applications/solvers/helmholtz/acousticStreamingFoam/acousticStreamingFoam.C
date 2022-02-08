@@ -69,6 +69,9 @@ int main(int argc, char *argv[])
 
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+    Info<< "\nSolving acoustic pressure\n" << endl;
+    #include "apEqn.H"
+    
     Info<< "\nStarting time loop\n" << endl;
 
     while (pimple.run(runTime))
@@ -116,7 +119,6 @@ int main(int argc, char *argv[])
 
             fvModels.correct();
 
-            #include "apEqn.H"
             #include "UEqn.H"
 
             // --- Pressure corrector loop
