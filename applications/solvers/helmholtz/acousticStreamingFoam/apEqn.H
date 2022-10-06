@@ -15,33 +15,46 @@ for (int aPcorr=0; aPcorr<nacousticCorrectors; aPcorr++)
     }
 
     volScalarField k_Re(sqr(omega/c) - A/ap);
+    volScalarField k_Im(-B/ap);
     
     fvScalarMatrix ReEqn
     (
         fvm::laplacian(p_Re)
         + fvm::SuSp(k_Re, p_Re)
-        // ==
-        // fvModels.source(p_Re)
-    );
-
-    volScalarField k_Im(-B/ap);
+        ==
+        k_Im * p_Im
+    );  
 
     fvScalarMatrix ImEqn
     (
         fvm::laplacian(p_Im)
-        + fvm::SuSp(k_Im, p_Im)
-        // ==
-        // fvModels.source(p_Im)
+        + fvm::SuSp(k_Re, p_Im)
+        ==
+        - k_Im * p_Re
     );
 
-    p_Re.relax();
-    p_Im.relax();
+    if ( aPcorr % 2 == 0 )
+    {
+        p_Re.relax();
+        p_Im.relax();
 
-    ReEqn.solve();
-    ImEqn.solve();
+        ReEqn.solve();
+        ImEqn.solve();
 
-    p_Re.correctBoundaryConditions();
-    p_Im.correctBoundaryConditions();
+        p_Re.correctBoundaryConditions();
+        p_Im.correctBoundaryConditions();
+    }
+    else
+    {
+        p_Im.relax();
+        p_Re.relax();
+
+        ImEqn.solve();
+        ReEqn.solve();
+
+        p_Im.correctBoundaryConditions();
+        p_Re.correctBoundaryConditions();
+    }
 
     ap = sqrt(sqr(p_Re) + sqr(p_Im));
 }
