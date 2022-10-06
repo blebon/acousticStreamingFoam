@@ -3,12 +3,12 @@ name: wmake
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'applications/solvers/helmholtz/acousticStreamingFoam/**'
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - 'applications/solvers/helmholtz/acousticStreamingFoam/**'
   workflow_dispatch:
