@@ -2,6 +2,7 @@ acousticStreamingFoam
 ======
 
 <!-- badges: start -->
+[![DOI](https://zenodo.org/badge/423837360.svg)](https://zenodo.org/badge/latestdoi/423837360)
 [![docs](https://img.shields.io/readthedocs/d?color=green)](https://blebon.com/acousticStreamingFoam)
 <!-- badges: end -->
 
