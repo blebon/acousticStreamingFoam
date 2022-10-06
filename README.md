@@ -1,6 +1,10 @@
 acousticStreamingFoam
 ======
 
+<!-- badges: start -->
+[![docs](https://img.shields.io/readthedocs/d?color=green)](https://blebon.com/acousticStreamingFoam)
+<!-- badges: end -->
+
 ## About OpenFOAM  
   OpenFOAM is a free, open source computational fluid dynamics (CFD) software
   package released by the OpenFOAM Foundation. It has a large user base across
@@ -35,3 +39,4 @@ acousticStreamingFoam
 
   * [Solver](applications/solvers/helmholtz/acousticStreamingFoam) - Updated version of the acoustic streaming solver
   * [Tutorial](tutorials/helmholtz/acousticStreamingFoam/USDC) - Tutorial case with geometry corresponding to the above reference 
+  * [Documentation](https://blebon.com/acousticStreamingFoam/) - Documentation

@@ -16,7 +16,7 @@ FoamFile
 
 dimensions      [1 -1 -2 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 1e-6;
 
 boundaryField
 {
@@ -28,23 +28,24 @@ boundaryField
     sonotrode
     {
         type            fixedGradient;
-        gradient        uniform 15818758852.51479;
+        gradient        uniform 4e7;
     }
 
     ram
     {
-        type            zeroGradient;
+        type            fixedValue;
+        value           $internalField;
     }
 
     free-surface
     {
         type            fixedValue;
-        value           uniform 0;
+        value           $internalField;
     }
 
     symmetric
     {
-        type		symmetry;
+        type            symmetry;
     }
 }
 

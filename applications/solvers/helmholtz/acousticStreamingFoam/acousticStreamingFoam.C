@@ -44,6 +44,7 @@ Description
 #include "fvConstraints.H"
 #include "localEulerDdtScheme.H"
 #include "fvcSmooth.H"
+#include "Function1.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -69,9 +70,14 @@ int main(int argc, char *argv[])
 
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-    Info<< "\nSolving acoustic pressure\n" << endl;
+    int nacousticCorrectors
+    (
+        pimple.dict().lookupOrDefault<int>("nacousticCorrectors", 5)
+    );
+
+    Info<< "Solving acoustic pressure" << endl;
     #include "apEqn.H"
-    
+   
     Info<< "\nStarting time loop\n" << endl;
 
     while (pimple.run(runTime))

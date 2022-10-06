@@ -75,60 +75,64 @@ dimensionedScalar rho
     transportProperties.lookup("rho")
 );
 
-dimensionedScalar A
+dimensionedScalar phorn
 (
-    "A",
-    dimPressure*inv(dimArea),
-    transportProperties.lookup("A")
+    "phorn",
+    dimPressure,
+    transportProperties.lookup("phorn")
 );
 
-dimensionedScalar B
+dimensionedScalar pblake
 (
-    "B",
-    dimPressure*inv(dimArea),
-    transportProperties.lookup("B")
+    "pblake",
+    dimPressure,
+    transportProperties.lookup("pblake")
 );
 
-volScalarField k_P
+dimensionedScalar N
 (
-   IOobject
-   (
-      "k_P",
-      runTime.timeName(),
-      mesh,
-      IOobject::NO_READ,
-      IOobject::NO_WRITE
-   ),
-   mesh,
-   sqr(omega/c)
+    "N",
+    inv(dimVolume),
+    transportProperties.lookup("N")
 );
 
-volScalarField Ar
+autoPtr<Function1<scalar>> A_curve(Function1<scalar>::New("AbyN", transportProperties));
+autoPtr<Function1<scalar>> B_curve(Function1<scalar>::New("BbyN", transportProperties));
+
+volScalarField A
 (
-   IOobject
-   (
-      "Ar",
-      runTime.timeName(),
-      mesh,
-      IOobject::NO_READ,
-      IOobject::NO_WRITE
-   ),
-   mesh,
-   A
+    IOobject
+    (
+        "A",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,
+    dimensionedScalar(
+        "_A",
+        dimPressure*inv(dimArea),
+        N.value()*A_curve->value(phorn.value())
+    )
 );
 
-volScalarField Bi
+volScalarField B
 (
-   IOobject
-   (
-      "Bi",
-      runTime.timeName(),
-      mesh,
-      IOobject::NO_READ,
-      IOobject::NO_WRITE
-   ),
-   mesh,
-   B
+    IOobject
+    (
+        "B",
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,
+    dimensionedScalar(
+        "_B",
+        dimPressure*inv(dimArea),
+        N.value()*B_curve->value(phorn.value())
+    )
 );
 
 Info<< "Reading field p\n" << endl;

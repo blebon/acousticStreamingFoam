@@ -16,31 +16,31 @@ FoamFile
 
 dimensions      [1 -1 -2 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 1e-6;
 
 boundaryField
 {
     "(hot-top|graphite|mould|water-film|sonotrode.*|fixed)"
     {
-        type	    calculated;
-        value	    $internalField;
+        type        calculated;
+        value       $internalField;
     }
 
     ram
     {
-        type	    calculated;
-        value	    $internalField;
+        type        calculated;
+        value       $internalField;
     }
 
     free-surface
     {
-        type	    calculated;
-        value	    $internalField;
+        type        calculated;
+        value       $internalField;
     }
 
     symmetry
     {
-        type	    symmetry;
+        type        symmetry;
     }
 }
 

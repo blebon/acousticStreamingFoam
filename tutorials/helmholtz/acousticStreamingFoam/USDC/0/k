@@ -25,7 +25,6 @@ boundaryField
     "(hot-top|graphite|mould|water-film|sonotrode.*|fixed)"
     {
         type            kqRWallFunction;
-        // value           uniform $kInitial;
         value           $internalField;
     }
 
@@ -42,7 +41,7 @@ boundaryField
 
     symmetry
     {
-        type		symmetry;
+        type            symmetry;
     }
 }
 

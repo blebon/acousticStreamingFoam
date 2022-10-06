@@ -40,7 +40,7 @@ boundaryField
 
     symmetry
     {
-        type		symmetry;
+        type            symmetry;
     }
 }
 

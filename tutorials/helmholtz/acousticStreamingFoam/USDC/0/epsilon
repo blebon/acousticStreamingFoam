@@ -14,34 +14,34 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-epsilonInitial	0.001;
+epsilonInitial 0.001;
 
-dimensions	[0 2 -3 0 0 0 0];
+dimensions     [0 2 -3 0 0 0 0];
 
-internalField	uniform $epsilonInitial;
+internalField  uniform $epsilonInitial;
 
 boundaryField
 {
     "(hot-top|graphite|mould|water-film|sonotrode.*|fixed)"
     {
-        type	    epsilonWallFunction;
-        value	    $internalField;
+        type        epsilonWallFunction;
+        value       $internalField;
     }
 
     ram
     {
-        type	    fixedValue;
+        type        fixedValue;
         value       $internalField;
     }
 
     free-surface
     {
-        type	    zeroGradient;
+        type        zeroGradient;
     }
 
     symmetry
     {
-        type	    symmetry;
+        type        symmetry;
     }
 }
 

@@ -14,18 +14,19 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+UCast    (0 0 -0.00233);
 UInitial    (0 0 0);
 
 dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform $UInitial;
+internalField   uniform $UCast;
 
 boundaryField
 {
     ram
     {
         type            fixedValue;
-        value           $internalField;
+        value           uniform $UCast;
     }
 
     "(hot-top|sonotrode.*|fixed)"
@@ -45,7 +46,7 @@ boundaryField
 
     symmetry
     {
-        type		symmetry;
+        type            symmetry;
     }
 }
 

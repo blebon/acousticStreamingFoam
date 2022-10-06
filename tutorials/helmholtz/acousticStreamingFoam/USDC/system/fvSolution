@@ -21,15 +21,15 @@ solvers
         preconditioner
         {
             preconditioner DIC;
-            tolerance      1e-08;
-            relTol         1e-08;
+            tolerance      1e-04;
+            relTol         1e-01;
             smoother       DICGaussSeidel;
             cacheAgglomeration yes;
         }
         solver           PBiCGStab;
         smoother         DILU;
-        tolerance        1e-12;
-        relTol           1e-08;
+        tolerance        1e-06;
+        relTol           1e-02;
         minIter          1;
         maxIter          5000;
     }
@@ -73,9 +73,10 @@ solvers
 PIMPLE
 {
     correctPhi          yes;
-    nOuterCorrectors    2;
+    nOuterCorrectors    1;
     nCorrectors         1;
     nNonOrthogonalCorrectors 0;
+    nacousticCorrectors 5;
 }
 
 relaxationFactors
@@ -86,8 +87,8 @@ relaxationFactors
     }
     equations
     {
-        p_Re   1.0;
-        p_Im   1.0;
+        p_Re            1.0;
+        p_Im            1.0;
         ".*"            1.0;
     }
 }

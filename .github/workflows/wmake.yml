@@ -1,0 +1,37 @@
+name: wmake
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'applications/solvers/helmholtz/acousticStreamingFoam/**'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'applications/solvers/helmholtz/acousticStreamingFoam/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: wmake
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install OpenFOAM 9
+      shell: bash
+      run: |
+        sudo sh -c "wget -O - https://dl.openfoam.org/gpg.key > /etc/apt/trusted.gpg.d/openfoam.asc"
+        sudo add-apt-repository http://dl.openfoam.org/ubuntu
+        sudo apt-get update
+        sudo apt-get -y install openfoam9
+    
+    - name: wmake acousticStreamingFoam
+      shell: bash
+      working-directory: applications/solvers/helmholtz/acousticStreamingFoam
+      continue-on-error: true
+      run: |
+        source /opt/openfoam9/etc/bashrc || true
+        wmake

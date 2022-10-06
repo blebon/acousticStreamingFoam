@@ -17,8 +17,11 @@ runParallel $application
 # Reconstruct case
 runApplication reconstructPar -newTimes -latestTime
 
+touch $(basename $PWD).foam
+
 # Surfaces visualization
 python3 convert_vtk.py
-python3 generate_pvd.py 
+python3 generate_pvd.py
+python3 plot_jet.py
 
 #------------------------------------------------------------------------------
