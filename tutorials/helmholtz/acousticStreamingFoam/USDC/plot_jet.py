@@ -185,7 +185,7 @@ def plot_jet(
 
     umask = where(U < 0.2, True, False)
     SKIP = 25
-    quiveropts = dict(pivot="middle", scale=10., units="xy", angles="xy")
+    quiveropts = dict(pivot="middle", scale=10.0, units="xy", angles="xy")
     q = ax.quiver(
         x[umask][::SKIP],
         z[umask][::SKIP],
